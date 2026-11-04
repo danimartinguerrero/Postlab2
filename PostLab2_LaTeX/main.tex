@@ -418,18 +418,14 @@ La entrada, en cambio, la seguimos anotando como valor pico a pico, así que en 
 ¿Puede ser conveniente medir valores eficaces (\emph{root mean square}) de las tensiones de entrada/salida en vez de medidas pico a pico? ¿Por qué y en qué circunstancias?
 \end{pregunta}
 
-Sí, y en nuestro montaje resultó imprescindible a alta frecuencia. El valor pico a pico es la diferencia entre la mayor y la menor de las muestras, $V_{\pp}=v_{\max}-v_{\min}$; para una sinusoide limpia, $V_{\pp}=2\sqrt{2}\,V_{\ef}$ y ambas medidas son equivalentes. Pero si a la señal $s(t)$ se le superpone un ruido $n(t)$, el máximo y el mínimo los marcan los picos del ruido, de modo que $V_{\pp}$ queda sesgada al alza y fluctúa de una adquisición a otra. El valor eficaz, en cambio, promedia todas las muestras de un número entero de periodos y, si el ruido es de media nula e incorrelado con la señal, ambas contribuciones se suman en cuadratura:
+Sí, y en nuestro montaje resultó imprescindible a alta frecuencia. Para una sinusoide limpia, $V_{\pp}=2\sqrt{2}\,V_{\ef}$ y ambas medidas son equivalentes; pero si a la señal se le superpone ruido, el máximo y el mínimo los marcan sus picos, y $V_{\pp}$ queda sesgada al alza y fluctúa. El valor eficaz, en cambio, promedia todas las muestras y, si el ruido es incorrelado con la señal, ambos se suman en cuadratura:
 \begin{equation}
-  V_{\ef}=\sqrt{\frac{1}{N}\sum_{k=1}^{N}v_k^2}
-  \qquad\Longrightarrow\qquad
-  V_{\ef}^2=V_{s,\ef}^2+V_{n,\ef}^2 .
+  V_{\ef}^2=V_{s,\ef}^2+V_{n,\ef}^2 ,
   \label{eq:cuadratura}
 \end{equation}
-Así, un ruido con la cuarta parte del valor eficaz de la señal solo aumenta $V_{\ef}$ un \qty{3}{\percent}, mientras que sus picos ($\sim\pm3\sigma_n$) pueden añadir cerca de un \qty{50}{\percent} a $V_{\pp}$.
+de modo que un ruido de la cuarta parte de la señal apenas aumenta $V_{\ef}$ un \qty{3}{\percent}. Lo vemos en la figura~\ref{fig:osc}\,(d): a $f\approx\qty{7.74}{kHz}$ la salida marca \qty{88.0}{mV_{pp}} pero solo \qty{20.0}{mV_{ef}}, cuando una sinusoide pura tendría \qty{56.6}{mV_{pp}}; el modelo predice \qty{19.4}{mV_{ef}}, así que el valor eficaz acierta con un \qty{3}{\percent} de error, mientras que el pico a pico daría unos \qty{4}{dB} de más.
 
-La figura~\ref{fig:osc}\,(d) lo confirma: a $f\approx\qty{7.74}{kHz}$ la salida marca $V_{\pp}=\qty{88.0}{mV}$ y $V_{\ef}=\qty{20.0}{mV}$, cuando una sinusoide pura de ese valor eficaz tendría \qty{56.6}{mV_{pp}}. El modelo predice \qty{19.4}{mV_{ef}}, de modo que el valor eficaz se desvía solo un \qty{3}{\percent}, mientras que con el pico a pico la ganancia saldría unos \qty{4}{dB} por encima de la real.
-
-Por tanto, conviene medir valores eficaces cuando la señal es pequeña y comparable al ruido, como en la banda atenuada del filtro (aquí, por encima de unos \qty{2}{kHz}), siempre con acoplamiento en alterna (el valor eficaz incluye la componente continua), sobre un número entero de periodos y midiendo ambos canales del mismo modo. En la banda pasante, con señales de varios voltios, la medida pico a pico es igual de válida y más inmediata.
+Por tanto, nos conviene medir valores eficaces cuando la señal es pequeña y comparable al ruido, como en la banda atenuada (aquí, por encima de unos \qty{2}{kHz}), con acoplamiento en alterna y midiendo ambos canales del mismo modo. En la banda pasante, la medida pico a pico es igual de válida y más inmediata.
 
 \begin{pregunta}
 Con un valor alto de las señales de entrada y salida, ¿cambia el valor de la ganancia en dB usando medidas de valores eficaces frente al resultado obtenido usando medidas pico a pico? Justifíquese.
