@@ -214,36 +214,36 @@ A continuación se muestra el esquema del circuito montado en el laboratorio:
 
 \begin{figure}[H]
 \centering
-\begin{circuitikz}[scale=0.92, transform shape, color=navy, line width=0.6pt]
+\begin{circuitikz}[scale=0.76, transform shape, font=\large, color=navy, line width=0.6pt]
   \ctikzset{bipoles/length=1.15cm, monopoles/ground/width=0.8}
   % Amplificador operacional (entrada no inversora arriba)
   \node[op amp, noinv input up, fill=fondo, scale=1.15] (OA) at (0,0) {\scriptsize\uA};
   % Entrada no inversora: red R1-R2-C2
   \draw (OA.+) -- ++(-2.1,0) coordinate (Vp);
-  \draw (Vp) to[R, l_=$R_2$, *-] ++(-2.6,0) coordinate (Vx)
-             to[R, l_=$R_1$, *-] ++(-2.6,0) coordinate (In);
-  \draw (Vp) to[C, l_=$C_2$] ($(Vp)+(0,-3.4)$) coordinate (G1) node[ground]{};
+  \draw (Vp) to[R, l_={\large $R_2$}, *-] ++(-2.6,0) coordinate (Vx)
+             to[R, l_={\large $R_1$}, *-] ++(-2.6,0) coordinate (In);
+  \draw (Vp) to[C, l_={\large $C_2$}] ($(Vp)+(0,-3.4)$) coordinate (G1) node[ground]{};
   % Fuente de entrada
   \draw (In) to[sV, l_=$v_{\text{in}}$] (In |- G1) node[ground]{};
   % Salida y realimentación
   \draw (OA.out) -- ++(1.4,0) coordinate (Out) to[short, -o] ++(0.9,0) node[right]{$\Vout$};
   \draw (Out) node[circ]{};
-  \draw (Vx) -- ++(0,2.2) coordinate (C1a) to[C, l=$C_1$] (C1a -| Out) -- (Out);
+  \draw (Vx) -- ++(0,2.2) coordinate (C1a) to[C, l={\large $C_1$}] (C1a -| Out) -- (Out);
   \draw (OA.-) -- ++(-0.7,0) coordinate (Vm) -- ++(0,-1.25) coordinate (Vm2);
-  \draw (Vm2) to[R, l_=$R_A$, *-] (Vm2 -| Out) -- (Out);
-  \draw (Vm2) to[R, l=$R_B$] (Vm2 |- G1) node[ground]{};
+  \draw (Vm2) to[R, l_={\large $R_A$}, *-] (Vm2 -| Out) -- (Out);
+  \draw (Vm2) to[R, l={\large $R_B$}] (Vm2 |- G1) node[ground]{};
   % Alimentación
-  \draw (OA.up) -- ++(0,0.45) node[above]{\scriptsize $+V_{CC}$};
-  \draw (OA.down) -- ++(0,-0.45) node[below]{\scriptsize $-V_{CC}$};
+  \draw (OA.up) -- ++(0,0.45) node[above]{\footnotesize $+V_{CC}$};
+  \draw (OA.down) -- ++(0,-0.45) node[below]{\footnotesize $-V_{CC}$};
   % Nudos y patillas
-  \node[above, font=\footnotesize] at ($(Vx)+(-0.35,0)$) {$V_x$};
-  \node[above, font=\footnotesize] at ($(Vp)+(0.45,0)$) {$V_+$};
-  \node[below left, font=\footnotesize] at ($(Vm)+(0,-0.05)$) {$V_-$};
-  \node[font=\tiny, color=gris] at ($(OA.+)+(-0.3,0.17)$) {3};
-  \node[font=\tiny, color=gris] at ($(OA.-)+(-0.3,0.17)$) {2};
-  \node[font=\tiny, color=gris] at ($(OA.out)+(0.3,0.17)$) {6};
-  \node[font=\tiny, color=gris] at ($(OA.up)+(-0.15,0.25)$) {7};
-  \node[font=\tiny, color=gris] at ($(OA.down)+(-0.15,-0.25)$) {4};
+  \node[above, font=\normalsize] at ($(Vx)+(-0.35,0)$) {$V_x$};
+  \node[above, font=\normalsize] at ($(Vp)+(0.45,0)$) {$V_+$};
+  \node[below left, font=\normalsize] at ($(Vm)+(0,-0.05)$) {$V_-$};
+  \node[font=\scriptsize, color=gris] at ($(OA.+)+(-0.3,0.17)$) {3};
+  \node[font=\scriptsize, color=gris] at ($(OA.-)+(-0.3,0.17)$) {2};
+  \node[font=\scriptsize, color=gris] at ($(OA.out)+(0.3,0.17)$) {6};
+  \node[font=\scriptsize, color=gris] at ($(OA.up)+(0.2,0.3)$) {7};
+  \node[font=\scriptsize, color=gris] at ($(OA.down)+(0.2,-0.3)$) {4};
 \end{circuitikz}
 \caption{Filtro pasa-baja de segundo orden montado en el laboratorio. Se indican los nudos empleados en el análisis del PreLab y las patillas del \uA{} utilizadas.}
 \label{fig:circuito}
@@ -352,52 +352,50 @@ La tensión de entrada, en cambio, se siguió anotando como valor pico a pico. E
 ¿Puede ser conveniente medir valores eficaces (\emph{root mean square}) de las tensiones de entrada/salida en vez de medidas pico a pico? ¿Por qué y en qué circunstancias?
 \end{pregunta}
 
-Sí, y en nuestro montaje resultó imprescindible a alta frecuencia. La medida pico a pico que proporciona el osciloscopio es la diferencia entre la mayor y la menor de las muestras adquiridas, $V_{\pp}=v_{\max}-v_{\min}$. Para una sinusoide limpia, $V_{\pp}=2\sqrt{2}\,V_{\ef}$ y ambas medidas contienen la misma información. Pero si a la señal útil $s(t)$ se le superpone un ruido $n(t)$, el máximo y el mínimo los marcan precisamente los picos del ruido, de modo que $V_{\pp}$ queda sesgada al alza y, además, fluctúa de una adquisición a otra.
-
-El valor eficaz, en cambio, se calcula promediando sobre todas las muestras de un número entero de periodos,
+Sí, y en nuestro montaje resultó imprescindible a alta frecuencia. El valor pico a pico es la diferencia entre la mayor y la menor de las muestras, $V_{\pp}=v_{\max}-v_{\min}$; para una sinusoide limpia, $V_{\pp}=2\sqrt{2}\,V_{\ef}$ y ambas medidas son equivalentes. Pero si a la señal $s(t)$ se le superpone un ruido $n(t)$, el máximo y el mínimo los marcan los picos del ruido, de modo que $V_{\pp}$ queda sesgada al alza y fluctúa de una adquisición a otra. El valor eficaz, en cambio, promedia todas las muestras de un número entero de periodos y, si el ruido es de media nula e incorrelado con la señal, ambas contribuciones se suman en cuadratura:
 \begin{equation}
   V_{\ef}=\sqrt{\frac{1}{N}\sum_{k=1}^{N}v_k^2}
   \qquad\Longrightarrow\qquad
-  V_{\ef}^2=V_{s,\ef}^2+V_{n,\ef}^2 ,
+  V_{\ef}^2=V_{s,\ef}^2+V_{n,\ef}^2 .
   \label{eq:cuadratura}
 \end{equation}
-donde la segunda igualdad se cumple cuando el ruido es de media nula e incorrelado con la señal: el término cruzado $\langle s\,n\rangle$ se anula al promediar y las contribuciones se suman en cuadratura. Así, un ruido cuyo valor eficaz sea la cuarta parte del de la señal solo aumenta $V_{\ef}$ un \qty{3}{\percent}, mientras que sus picos, del orden de $\pm3\sigma_n$, pueden añadir cerca de un \qty{50}{\percent} a $V_{\pp}$.
+Así, un ruido con la cuarta parte del valor eficaz de la señal solo aumenta $V_{\ef}$ un \qty{3}{\percent}, mientras que sus picos ($\sim\pm3\sigma_n$) pueden añadir cerca de un \qty{50}{\percent} a $V_{\pp}$.
 
-La figura~\ref{fig:osc}\,(d) lo muestra con claridad. A $f\approx\qty{7.74}{kHz}$ el osciloscopio da para la salida $V_{\pp}=\qty{88.0}{mV}$ y $V_{\ef}=\qty{20.0}{mV}$; si la señal fuese una sinusoide pura, sería $V_{\pp}=2\sqrt2\cdot\qty{20.0}{mV}=\qty{56.6}{mV}$, así que unos \qty{31}{mV} del valor pico a pico son ruido. El modelo predice a esa frecuencia una salida de \qty{19.4}{mV_{ef}}: el valor eficaz medido se desvía solo un \qty{3}{\percent}, mientras que con el pico a pico la ganancia saldría unos \qty{4}{dB} por encima de la real.
+La figura~\ref{fig:osc}\,(d) lo confirma: a $f\approx\qty{7.74}{kHz}$ la salida marca $V_{\pp}=\qty{88.0}{mV}$ y $V_{\ef}=\qty{20.0}{mV}$, cuando una sinusoide pura de ese valor eficaz tendría \qty{56.6}{mV_{pp}}. El modelo predice \qty{19.4}{mV_{ef}}, de modo que el valor eficaz se desvía solo un \qty{3}{\percent}, mientras que con el pico a pico la ganancia saldría unos \qty{4}{dB} por encima de la real.
 
-En resumen, conviene medir valores eficaces cuando la señal es pequeña y comparable al ruido, como ocurre en la banda atenuada del filtro (en nuestro caso, por encima de unos \qty{2}{kHz}). Hay que tener en cuenta, eso sí, que el valor eficaz incluye la componente continua (debe medirse con acoplamiento en alterna si hay \emph{offset}), que debe abarcar un número entero de periodos y que ambos canales han de medirse del mismo modo, como se justifica en la pregunta siguiente. En la banda pasante, con señales de varios voltios, la medida pico a pico es igual de válida y más inmediata.
+Por tanto, conviene medir valores eficaces cuando la señal es pequeña y comparable al ruido, como en la banda atenuada del filtro (aquí, por encima de unos \qty{2}{kHz}), siempre con acoplamiento en alterna (el valor eficaz incluye la componente continua), sobre un número entero de periodos y midiendo ambos canales del mismo modo. En la banda pasante, con señales de varios voltios, la medida pico a pico es igual de válida y más inmediata.
 
 \begin{pregunta}
 Con un valor alto de las señales de entrada y salida, ¿cambia el valor de la ganancia en dB usando medidas de valores eficaces frente al resultado obtenido usando medidas pico a pico? Justifíquese.
 \end{pregunta}
 
-No, siempre que las dos señales sean sinusoidales y se midan ambas del mismo modo. Para $v(t)=A\sin(\omega t+\varphi)$ se tiene $V_{\pp}=2A$ y $V_{\ef}=A/\sqrt2$, es decir, $V_{\pp}=2\sqrt2\,V_{\ef}$. Como el filtro es un sistema lineal e invariante, la salida es una sinusoide de la misma frecuencia que la entrada, y el factor $2\sqrt2$ se cancela en el cociente:
+No, siempre que las dos señales sean sinusoidales y se midan del mismo modo. Como el filtro es lineal e invariante, la salida es una sinusoide de la misma frecuencia que la entrada y, para ambas, $V_{\pp}=2\sqrt2\,V_{\ef}$, de modo que el factor se cancela en el cociente:
 \begin{equation}
   |T|_{\text{dB}}
   =20\log_{10}\frac{V_{\text{out},\pp}}{V_{\text{in},\pp}}
   =20\log_{10}\frac{2\sqrt2\,V_{\text{out},\ef}}{2\sqrt2\,V_{\text{in},\ef}}
   =20\log_{10}\frac{V_{\text{out},\ef}}{V_{\text{in},\ef}} .
 \end{equation}
-Con señales altas la relación señal/ruido es grande y, por \eqref{eq:cuadratura}, el ruido solo modifica el valor eficaz en un factor $\sqrt{1+\rho^2}$, con $\rho=V_{n,\ef}/V_{s,\ef}$; en decibelios, $10\log_{10}(1+\rho^2)\approx\qty{4.3}{dB}\cdot\rho^2$, que para $\rho=\qty{1}{\percent}$ supone menos de \qty{0.001}{dB}. Las dos medidas solo discreparían si la forma de onda dejara de ser sinusoidal, por ejemplo si la salida se recortara al acercarse a la alimentación (un seno recortado tiene $V_{\pp}/V_{\ef}<2\sqrt2$) o si el AO limitara la pendiente de la señal. Lo primero se vigiló durante toda la medida; lo segundo no ocurre aquí, porque el caso más exigente, $\qty{5.48}{V_{pp}}$ a \qty{774}{Hz}, requiere $2\pi f A\approx\qty{0.013}{V/\micro s}$, muy por debajo del \emph{slew rate} del \uA{} (unos \qty{0.5}{V/\micro s}).
+Con señales altas el ruido es despreciable: por \eqref{eq:cuadratura}, solo altera el valor eficaz en $10\log_{10}(1+\rho^2)\approx\qty{4.3}{dB}\cdot\rho^2$, con $\rho=V_{n,\ef}/V_{s,\ef}$, menos de \qty{0.001}{dB} para $\rho=\qty{1}{\percent}$. Las medidas solo discreparían si la onda dejara de ser sinusoidal, por ejemplo por recorte en la alimentación (que se vigiló en todo momento) o por el \emph{slew rate} del \uA{}, que no limita aquí: el caso más exigente, $\qty{5.48}{V_{pp}}$ a \qty{774}{Hz}, requiere $2\pi fA\approx\qty{0.013}{V/\micro s}$, frente a unos \qty{0.5}{V/\micro s}.
 
-Precisamente por eso no deben mezclarse ambos tipos de medida. Si se divide un valor eficaz entre uno pico a pico,
+Lo que no puede hacerse es mezclar ambos tipos de medida, ya que
 \begin{equation}
   20\log_{10}\frac{V_{\text{out},\ef}}{V_{\text{in},\pp}}
   =|T|_{\text{dB}}-20\log_{10}\!\left(2\sqrt2\right)
-  =|T|_{\text{dB}}-\qty{9.03}{dB},
+  =|T|_{\text{dB}}-\qty{9.03}{dB}.
 \end{equation}
-y la ganancia queda desplazada \qty{9.03}{dB} hacia abajo. Es lo que ocurría en nuestros registros a partir de \qty{2780}{Hz}, donde $\Vin$ se anotó pico a pico y $\Vout$ como valor eficaz. Para corregirlo basta con convertir la entrada, $V_{\text{in},\ef}=\qty{2.02}{V}/(2\sqrt2)=\qty{0.714}{V}$. A \qty{7740}{Hz}, por ejemplo, el cociente sin corregir da $\qty{-40.09}{dB}$, el corregido $\qty{-31.06}{dB}$ y el modelo $\qty{-31.31}{dB}$. Todas las tablas y gráficas que siguen usan ya los valores corregidos.
+Es lo que ocurría en nuestros registros a partir de \qty{2780}{Hz}, donde $\Vin$ se anotó pico a pico y $\Vout$ como valor eficaz. Lo corregimos convirtiendo la entrada, $V_{\text{in},\ef}=\qty{2.02}{V}/(2\sqrt2)=\qty{0.714}{V}$: a \qty{7740}{Hz}, por ejemplo, se pasa de $\qty{-40.09}{dB}$ a $\qty{-31.06}{dB}$, frente a $\qty{-31.31}{dB}$ del modelo. Todas las tablas y gráficas que siguen usan los valores corregidos.
 
 \begin{pregunta}
 Empíricamente se encuentra que, bajo ciertas condiciones, la medida de frecuencia que realiza el osciloscopio puede ser menos estable si se usa uno de los dos canales (es decir, realizar el \emph{triggering} es más difícil). ¿Qué canal debe ser usado para medir la frecuencia: aquel en el que se mide la tensión de entrada o aquel en el que se mide la de salida del filtro? Justifíquese.
 \end{pregunta}
 
-Debe usarse el canal de la tensión de entrada (el canal~1, como además exige el guion). En principio, cualquiera de los dos valdría: un sistema lineal e invariante no crea frecuencias nuevas, así que la salida tiene exactamente la misma frecuencia que la entrada. La diferencia está en la calidad de la señal sobre la que trabajan el disparo y el frecuencímetro del osciloscopio, que detectan los cruces de la señal por el nivel de disparo:
+Debe usarse el canal de la tensión de entrada (el canal~1, como además exige el guion). Un sistema lineal e invariante no crea frecuencias nuevas, así que ambas señales tienen la misma frecuencia; la diferencia está en la calidad de la señal sobre la que trabajan el disparo y el frecuencímetro, que detectan sus cruces por el nivel de disparo:
 \begin{itemize}
-  \item La entrada procede directamente del generador: tiene una amplitud constante (\qty{1.04}{} o \qty{2.02}{V_{pp}}) en todo el barrido y es prácticamente limpia. Un único nivel de disparo, \qty{336}{mV} en todas las capturas de la figura~\ref{fig:osc}, sirve para todas las frecuencias.
-  \item La salida varía en más de \qty{45}{dB} a lo largo del barrido y, en la banda atenuada, se reduce a unas decenas de milivoltios con un ruido superpuesto de unos pocos milivoltios. Cerca de cada cruce el ruido hace que la señal atraviese el nivel de disparo varias veces, comparable a la histéresis del comparador, de modo que se producen disparos falsos, la traza «baila» y la frecuencia medida fluctúa. Además, habría que reajustar el nivel de disparo en cada punto.
+  \item La entrada procede directamente del generador, es prácticamente limpia y su amplitud es constante en todo el barrido, de modo que un único nivel de disparo (\qty{336}{mV} en todas las capturas) sirve para cualquier frecuencia.
+  \item La salida varía en más de \qty{45}{dB} a lo largo del barrido y, en la banda atenuada, se reduce a unas decenas de milivoltios con un ruido de unos pocos milivoltios, comparable a la histéresis del comparador. Cerca de cada cruce, el ruido hace que la señal atraviese el nivel varias veces: hay disparos falsos, la traza «baila» y la frecuencia medida fluctúa; además, habría que reajustar el nivel en cada punto.
 \end{itemize}
-La figura~\ref{fig:osc}\,(d) lo ilustra bien: pese a lo ruidosa que es la salida, la imagen es estable porque el disparo se realiza sobre la entrada.
+La figura~\ref{fig:osc}\,(d) lo ilustra: pese a lo ruidosa que es la salida, la imagen es estable porque el disparo se realiza sobre la entrada.
 
 \subsection{Tablas de medidas}
 
