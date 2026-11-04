@@ -310,9 +310,10 @@ No, y para verlo basta con que nos fijemos en los polos de $T(s)$, es decir, en 
 \end{equation}
 expresión válida para $|Q|>1/2$ (respuesta subamortiguada). Como cada polo aporta a la respuesta libre un término $e^{st}=e^{\sigma t}e^{j\omega_d t}$, una oscilación con envolvente $e^{\sigma t}$, todo depende del signo de $\sigma$, que es el contrario al de $Q$. Recordando lo que obtuvimos en el PreLab,
 \begin{equation}
-  \frac{1}{Q}=\frac{(R_1+R_2)\,C_2-\dfrac{R_A}{R_B}\,R_1C_1}{\sqrt{R_1R_2C_1C_2}}
-  \;\xrightarrow{\;R_1=R_2,\ C_1=C_2\;}\;
-  2-\frac{R_A}{R_B},
+\begin{aligned}
+  \frac{1}{Q}&=\frac{(R_1+R_2)\,C_2-\dfrac{R_A}{R_B}\,R_1C_1}{\sqrt{R_1R_2C_1C_2}}\\[4pt]
+  &=2-\frac{R_A}{R_B}\qquad\text{(si $R_1=R_2$ y $C_1=C_2$)},
+\end{aligned}
   \label{eq:Qsimple}
 \end{equation}
 lo que nos dice que el amortiguamiento es la diferencia entre la disipación en las resistencias y la realimentación positiva a través de $C_1$, que crece con $R_A/R_B$. Con componentes iguales dos a dos, como en la tabla~I, distinguimos tres regímenes (figura~\ref{fig:polos}):
