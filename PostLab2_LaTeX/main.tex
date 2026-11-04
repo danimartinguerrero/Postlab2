@@ -297,18 +297,82 @@ A continuación se dan los valores de los componentes usados en el circuito, med
 ¿Puede el valor de $R_A$ acercarse al doble del de $R_B$? ¿Por qué? La razón debe buscarse de manera teórica usando los resultados obtenidos en el PreLab.
 \end{pregunta}
 
-No. Con componentes iguales dos a dos, $R_1=R_2=R$ y $C_1=C_2=C$, como en la tabla~I, el factor de calidad de \eqref{eq:param} se simplifica a
+No, y para verlo basta con que nos fijemos en los polos de $T(s)$, es decir, en las raíces de su denominador:
 \begin{equation}
-  Q=\frac{RC}{2RC-\dfrac{R_A}{R_B}RC}=\frac{1}{2-R_A/R_B}=\frac{1}{3-K}.
+\begin{gathered}
+  D(s)=s^2+\frac{\omega_0}{Q}\,s+\omega_0^2=0
+  \quad\Longrightarrow\quad
+  s_{1,2}=\sigma\pm j\omega_d ,\\
+  \sigma=-\frac{\omega_0}{2Q},\qquad
+  \omega_d=\omega_0\sqrt{1-\frac{1}{4Q^2}},
+\end{gathered}
+  \label{eq:polos}
+\end{equation}
+expresión válida para $|Q|>1/2$ (respuesta subamortiguada). Como cada polo aporta a la respuesta libre un término $e^{st}=e^{\sigma t}e^{j\omega_d t}$, una oscilación con envolvente $e^{\sigma t}$, todo depende del signo de $\sigma$, que es el contrario al de $Q$. Recordando lo que obtuvimos en el PreLab,
+\begin{equation}
+  \frac{1}{Q}=\frac{(R_1+R_2)\,C_2-\dfrac{R_A}{R_B}\,R_1C_1}{\sqrt{R_1R_2C_1C_2}}
+  \;\xrightarrow{\;R_1=R_2,\ C_1=C_2\;}\;
+  2-\frac{R_A}{R_B},
   \label{eq:Qsimple}
 \end{equation}
-Si $R_A\to 2R_B$, entonces $Q\to\infty$: los polos, $s_\pm=-\frac{\omega_0}{2Q}\pm j\omega_0\sqrt{1-\frac{1}{4Q^2}}$, se acercan al eje imaginario y el pico de resonancia, $|T(j\omega_0)|=KQ$, crece sin límite. El circuito deja de comportarse como un filtro y pasa a ser un oscilador a la frecuencia $f_0$. Si se llegara a superar ese valor ($R_A>2R_B$), sería $Q<0$, los polos tendrían parte real positiva y la salida crecería hasta saturar el AO: es la condición de estabilidad del PreLab,
+lo que nos dice que el amortiguamiento es la diferencia entre la disipación en las resistencias y la realimentación positiva a través de $C_1$, que crece con $R_A/R_B$. Con componentes iguales dos a dos, como en la tabla~I, distinguimos tres regímenes (figura~\ref{fig:polos}):
+\begin{itemize}
+  \item $R_A<2R_B$: $Q>0$ y $\sigma<0$; los polos están en el semiplano izquierdo, la envolvente decae y el circuito filtra.
+  \item $R_A=2R_B$: $1/Q=0$ y los polos caen en $\pm j\omega_0$; el pico $|T(j\omega_0)|=KQ$ diverge y el circuito oscila a $f_0$.
+  \item $R_A>2R_B$: $Q<0$ y $\sigma>0$; los polos pasan al semiplano derecho y cualquier perturbación (ruido, el transitorio de encendido) crece exponencialmente hasta que la salida alcanza $\pm V_{CC}$ y el AO se satura.
+\end{itemize}
+En general, para que el filtro sea estable necesitamos
 \begin{equation}
   \frac{R_A}{R_B}<\frac{(R_1+R_2)\,C_2}{R_1C_1},
 \end{equation}
-que con los componentes medidos fija el límite en $R_A/R_B<\num{2.031}$. Nuestro cociente, $R_A/R_B=\num{1.507}$, queda holgadamente por debajo y da $Q=\num{1.92}$.
+que con los componentes medidos fija el límite en $R_A/R_B<\num{2.031}$. Nuestro cociente, $R_A/R_B=\num{1.507}$, queda holgadamente por debajo y da $Q=\num{1.92}$: polos complejos conjugados en el semiplano izquierdo, con $\sigma=-\qty{1310}{s^{-1}}$, de modo que cualquier transitorio se extingue en unos $1/|\sigma|\approx\qty{0.76}{ms}$.
 
-Incluso sin llegar al límite, acercarse a él es mala idea en la práctica, porque el filtro se vuelve muy sensible a las tolerancias. Derivando \eqref{eq:Qsimple}, $\dif Q/Q = Q\,(R_A/R_B)\,\dif(R_A/R_B)/(R_A/R_B)$: con $R_A/R_B=\num{1.5}$ ($Q=2$) un error del \qty{1}{\percent} en $R_A$ altera $Q$ un \qty{3}{\percent}, pero con $R_A/R_B=\num{1.9}$ ($Q=10$, pico de \qty{20}{dB} sobre la banda pasante) ese mismo \qty{1}{\percent} lo altera un \qty{19}{\percent}, y la tolerancia habitual de las resistencias (\qty{5}{\percent}) bastaría para volver inestable el circuito.
+\begin{figure}[htbp]
+\centering
+\pgfplotsset{
+  colormap={fase}{rgb=(0.970,0.213,0.213) rgb=(0.970,0.970,0.213) rgb=(0.213,0.970,0.213)
+                  rgb=(0.213,0.970,0.970) rgb=(0.213,0.213,0.970) rgb=(0.970,0.213,0.970)
+                  rgb=(0.970,0.213,0.213)}}
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=3 by 1, horizontal sep=0.45cm, y descriptions at=edge left},
+  width=5.35cm, height=5.35cm,
+  xmin=-1.6, xmax=1.6, ymin=-1.6, ymax=1.6, axis equal image,
+  xtick={-1,0,1}, ytick={-1,0,1},
+  tick label style={font=\footnotesize, color=navy!80!black},
+  label style={font=\small, color=navy},
+  title style={font=\small, color=navy, yshift=-2pt},
+  xlabel={$\operatorname{Re}s/\omega_0$}, ylabel={$\operatorname{Im}s/\omega_0$},
+  axis line style={gris!70}, tick style={gris!70}, enlargelimits=false,
+  axis on top,
+  /pgf/number format/use comma,
+]
+\newcommand{\marcas}[2]{%
+  \addplot[white, line width=0.5pt, opacity=0.85] coordinates {(0,-1.6) (0,1.6)};
+  \addplot[white, densely dashed, line width=0.6pt, domain=0:360, samples=120] ({cos(x)},{sin(x)});
+  \addplot[only marks, mark=x, mark size=3.6pt, navy, line width=2.6pt] coordinates {(#1,#2) (#1,-#2)};
+  \addplot[only marks, mark=x, mark size=3.2pt, white, line width=1.3pt] coordinates {(#1,#2) (#1,-#2)};
+}
+\nextgroupplot[title={(a) $Q=\num{1.92}$}]
+  \addplot graphics[xmin=-1.6, xmax=1.6, ymin=-1.6, ymax=1.6] {figuras/fase_estable.png};
+  \marcas{-0.2599}{0.9656}
+\nextgroupplot[title={(b) $Q\to\infty$}]
+  \addplot graphics[xmin=-1.6, xmax=1.6, ymin=-1.6, ymax=1.6] {figuras/fase_limite.png};
+  \marcas{0}{1}
+\nextgroupplot[title={(c) $Q=\num{-2.15}$},
+  colorbar, colormap name=fase, point meta min=-3.14159, point meta max=3.14159,
+  colorbar style={width=0.22cm, ytick={-3.14159,0,3.14159}, yticklabels={$-\pi$,$0$,$\pi$},
+    ylabel={$\arg T(s)$}, ylabel style={font=\small, color=navy},
+    tick label style={font=\footnotesize, color=navy!80!black}, axis line style={gris!70}}]
+  \addplot graphics[xmin=-1.6, xmax=1.6, ymin=-1.6, ymax=1.6] {figuras/fase_inestable.png};
+  \marcas{0.2328}{0.9725}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Retratos de fase de $T(s)$ con los componentes medidos: cada punto $s$ se colorea según $\arg T(s)$, y alrededor de cada polo ($\times$) el círculo cromático se recorre una vez. Los polos se mueven sobre la circunferencia $|s|=\omega_0$ (discontinua) al variar $R_A/R_B$: (a) nuestro montaje, $R_A/R_B=\num{1.507}$, estable; (b) límite de estabilidad, $R_A/R_B=\num{2.031}$, oscilador; (c) $R_A/R_B=\num{2.5}$, inestable: la salida crece hasta saturar el AO.}
+\label{fig:polos}
+\end{figure}
+
+Incluso sin llegar al límite, en la práctica no nos conviene acercarnos a él, porque el filtro se vuelve muy sensible a las tolerancias. Si derivamos $Q=1/(2-R_A/R_B)$, obtenemos $\dif Q/Q=Q\,\dif(R_A/R_B)$, de modo que con $R_A/R_B=\num{1.5}$ ($Q=2$) un error del \qty{1}{\percent} en $R_A$ altera $Q$ un \qty{3}{\percent}, pero con $R_A/R_B=\num{1.9}$ ($Q=10$, pico de \qty{20}{dB} sobre la banda pasante) ese mismo \qty{1}{\percent} lo altera un \qty{19}{\percent}, y la tolerancia habitual de las resistencias (\qty{5}{\percent}) bastaría para volver inestable el circuito.
 
 \subsection{Procedimiento y decisiones tomadas durante la medida}
 
@@ -343,6 +407,7 @@ La tensión de entrada, en cambio, se siguió anotando como valor pico a pico. E
   \label{fig:osc}
 \end{figure}
 
+\clearpage
 % =====================================================================
 \section{Preguntas bloque 1}
 \label{sec:bloque1}
