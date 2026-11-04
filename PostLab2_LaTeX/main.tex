@@ -379,12 +379,12 @@ Incluso sin llegar al límite, en la práctica no nos conviene acercarnos a él,
 
 Se aplicó a la entrada una señal sinusoidal del generador, que se midió siempre en el canal~1 del osciloscopio, y la salida del filtro en el canal~2. En la banda pasante y en torno a la resonancia se trabajó con $\Vin=\qty{1.04}{V_{pp}}$, y se comprobó en cada punto que la salida no se recortaba (la mayor amplitud, $\qty{5.48}{V_{pp}}$ a \qty{774}{Hz}, queda muy lejos de la saturación del AO). El rango cubierto fue \qtyrange{20}{10000}{Hz}; la figura~\ref{fig:osc}\,(a) muestra, como comprobación adicional, que a \qty{12.9}{Hz} la ganancia sigue siendo la de la banda pasante.
 
-A partir de \qty{2780}{Hz}, cuando el filtro ya atenuaba la salida hasta las décimas de voltio y el ruido empezaba a enmascararla (figura~\ref{fig:osc}\,(d)), se tomaron dos decisiones:
+A partir de \qty{2780}{Hz}, con la salida ya atenuada hasta las décimas de voltio, la forma de onda dejó de verse limpia: el ruido la deformaba y la lectura pico a pico se volvía inestable (figura~\ref{fig:osc}\,(d)). Sobre la marcha, hicimos dos cambios:
 \begin{enumerate}[label=(\roman*)]
-  \item \textbf{Aumentar la amplitud de entrada} hasta $\Vin=\qty{2.02}{V_{pp}}$. Como el filtro es lineal, $|T|$ no depende de la amplitud, y al duplicar la entrada se duplica la señal útil de salida frente a un ruido que no cambia. A esas frecuencias la salida es pequeña, así que no hay riesgo de recorte.
-  \item \textbf{Medir el valor eficaz de la salida} en lugar de su valor pico a pico, por las razones que se discuten en la primera pregunta del bloque~1.
+  \item \textbf{Aumentamos la amplitud de entrada} hasta $\Vin=\qty{2.02}{V_{pp}}$. Como el filtro es lineal, $|T|$ no depende de la amplitud, y así la señal útil de salida gana terreno frente a un ruido que no cambia.
+  \item \textbf{Pasamos a medir el valor eficaz de la salida}, que es mucho menos sensible al ruido que el pico a pico, como se discute en la primera pregunta del bloque~1.
 \end{enumerate}
-La tensión de entrada, en cambio, se siguió anotando como valor pico a pico. Esa mezcla introduce un error sistemático que se analiza y corrige en la sección~\ref{sec:bloque1}.
+La entrada, en cambio, la seguimos anotando como valor pico a pico, así que en esos puntos el cociente mezcla dos tipos de medida. Lo corregimos en la sección~\ref{sec:bloque1}.
 
 \begin{figure}[tbp]
   \centering
