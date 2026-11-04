@@ -214,36 +214,36 @@ A continuación se muestra el esquema del circuito montado en el laboratorio:
 
 \begin{figure}[H]
 \centering
-\begin{circuitikz}[scale=0.76, transform shape, font=\large, color=navy, line width=0.6pt]
+\begin{circuitikz}[scale=0.92, transform shape, color=navy, line width=0.6pt]
   \ctikzset{bipoles/length=1.15cm, monopoles/ground/width=0.8}
   % Amplificador operacional (entrada no inversora arriba)
   \node[op amp, noinv input up, fill=fondo, scale=1.15] (OA) at (0,0) {\scriptsize\uA};
   % Entrada no inversora: red R1-R2-C2
   \draw (OA.+) -- ++(-2.1,0) coordinate (Vp);
-  \draw (Vp) to[R, l_={\large $R_2$}, *-] ++(-2.6,0) coordinate (Vx)
-             to[R, l_={\large $R_1$}, *-] ++(-2.6,0) coordinate (In);
-  \draw (Vp) to[C, l_={\large $C_2$}] ($(Vp)+(0,-3.4)$) coordinate (G1) node[ground]{};
+  \draw (Vp) to[R, l_=$R_2$, *-] ++(-2.6,0) coordinate (Vx)
+             to[R, l_=$R_1$, *-] ++(-2.6,0) coordinate (In);
+  \draw (Vp) to[C, l_=$C_2$] ($(Vp)+(0,-3.4)$) coordinate (G1) node[ground]{};
   % Fuente de entrada
   \draw (In) to[sV, l_=$v_{\text{in}}$] (In |- G1) node[ground]{};
   % Salida y realimentación
   \draw (OA.out) -- ++(1.4,0) coordinate (Out) to[short, -o] ++(0.9,0) node[right]{$\Vout$};
   \draw (Out) node[circ]{};
-  \draw (Vx) -- ++(0,2.2) coordinate (C1a) to[C, l={\large $C_1$}] (C1a -| Out) -- (Out);
+  \draw (Vx) -- ++(0,2.2) coordinate (C1a) to[C, l=$C_1$] (C1a -| Out) -- (Out);
   \draw (OA.-) -- ++(-0.7,0) coordinate (Vm) -- ++(0,-1.25) coordinate (Vm2);
-  \draw (Vm2) to[R, l_={\large $R_A$}, *-] (Vm2 -| Out) -- (Out);
-  \draw (Vm2) to[R, l={\large $R_B$}] (Vm2 |- G1) node[ground]{};
+  \draw (Vm2) to[R, l_=$R_A$, *-] (Vm2 -| Out) -- (Out);
+  \draw (Vm2) to[R, l=$R_B$] (Vm2 |- G1) node[ground]{};
   % Alimentación
-  \draw (OA.up) -- ++(0,0.45) node[above]{\footnotesize $+V_{CC}$};
-  \draw (OA.down) -- ++(0,-0.45) node[below]{\footnotesize $-V_{CC}$};
+  \draw (OA.up) -- ++(0,0.45) node[above]{\scriptsize $+V_{CC}$};
+  \draw (OA.down) -- ++(0,-0.45) node[below]{\scriptsize $-V_{CC}$};
   % Nudos y patillas
-  \node[above, font=\normalsize] at ($(Vx)+(-0.35,0)$) {$V_x$};
-  \node[above, font=\normalsize] at ($(Vp)+(0.45,0)$) {$V_+$};
-  \node[below left, font=\normalsize] at ($(Vm)+(0,-0.05)$) {$V_-$};
-  \node[font=\scriptsize, color=gris] at ($(OA.+)+(-0.3,0.17)$) {3};
-  \node[font=\scriptsize, color=gris] at ($(OA.-)+(-0.3,0.17)$) {2};
-  \node[font=\scriptsize, color=gris] at ($(OA.out)+(0.3,0.17)$) {6};
-  \node[font=\scriptsize, color=gris] at ($(OA.up)+(0.2,0.3)$) {7};
-  \node[font=\scriptsize, color=gris] at ($(OA.down)+(0.2,-0.3)$) {4};
+  \node[above, font=\footnotesize] at ($(Vx)+(-0.35,0)$) {$V_x$};
+  \node[above, font=\footnotesize] at ($(Vp)+(0.45,0)$) {$V_+$};
+  \node[below left, font=\footnotesize] at ($(Vm)+(0,-0.05)$) {$V_-$};
+  \node[font=\tiny, color=gris] at ($(OA.+)+(-0.3,0.17)$) {3};
+  \node[font=\tiny, color=gris] at ($(OA.-)+(-0.3,0.17)$) {2};
+  \node[font=\tiny, color=gris] at ($(OA.out)+(0.3,0.17)$) {6};
+  \node[font=\tiny, color=gris] at ($(OA.up)+(0.2,0.3)$) {7};
+  \node[font=\tiny, color=gris] at ($(OA.down)+(0.2,-0.3)$) {4};
 \end{circuitikz}
 \caption{Filtro pasa-baja de segundo orden montado en el laboratorio. Se indican los nudos empleados en el análisis del PreLab y las patillas del \uA{} utilizadas.}
 \label{fig:circuito}
@@ -286,7 +286,7 @@ A continuación se dan los valores de los componentes usados en el circuito, med
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.62\textwidth]{figuras/montaje.jpg}
+  \includegraphics[width=0.44\textwidth]{figuras/montaje.jpg}
   \caption{Montaje del filtro en la placa de prototipos del entrenador A-TEK AT-700: el \uA{} en encapsulado DIP-8 y, a su alrededor, la red $R_1C_1$–$R_2C_2$ y el divisor $R_A$–$R_B$.}
   \label{fig:montaje}
 \end{figure}
